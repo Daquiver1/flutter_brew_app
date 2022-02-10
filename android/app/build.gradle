@@ -63,9 +63,9 @@ flutter {
     source '../..'
 }
 
-apply plugin: 'com.google.gms.google-services'
 
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.0.4')
+    implementation 'com.google.firebase:firebase-auth-ktx'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
