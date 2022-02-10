@@ -11,10 +11,10 @@ class AuthService {
 	}
 
 	// Auth change user steam
-	Stream<MyUser> get user {
-		return _auth.onAuthStateChanged;
-		//.map((UserCredential user) => _userFromFirebaseUser(user)); same as below
-		.map(_userFromFirebaseUser);
+	Stream<MyUser?> get user {
+		return _auth.authStateChanges().map((User? user) => _userFromFirebaseUser(user!)); 
+		//same as below
+		//.map(_userFromFirebaseUser);
 	}
 
 
@@ -22,7 +22,6 @@ class AuthService {
 	Future signInAnon() async {
 		try {
 			UserCredential result = await _auth.signInAnonymously();
-
 			User? user = result.user;
 			return _userFromFirebaseUser(user!);
 		} catch (err) {
