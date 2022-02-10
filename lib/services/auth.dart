@@ -10,6 +10,14 @@ class AuthService {
 		return user != null ? MyUser(uid: user.uid) : null;
 	}
 
+	// Auth change user steam
+	Stream<MyUser> get user {
+		return _auth.onAuthStateChanged;
+		//.map((UserCredential user) => _userFromFirebaseUser(user)); same as below
+		.map(_userFromFirebaseUser);
+	}
+
+
 	// Sign in anon
 	Future signInAnon() async {
 		try {
