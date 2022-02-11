@@ -31,7 +31,7 @@ class _RegisterState extends State<Register> {
 				icon: Icon(Icons.person),
 				label: Text("Sign in"),
 				onPressed: () {
-					widget.toggleView(); 	// Refers to the first widget.
+					widget.toggleView?.call(); 	// Refers to the first widget.
 				}
 				),
 			],

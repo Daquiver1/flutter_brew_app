@@ -19,7 +19,6 @@ class _AuthenticateState extends State<Authenticate>{
 		if (showSignIn == true) {
 			return SignIn(toggleView: toggleView);
 		} else {
-			return const Register({Key? key, void Function() toggleView}) : super(key: key);
 			return Register(toggleView: toggleView);
 		}
 	}
