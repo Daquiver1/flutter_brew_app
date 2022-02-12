@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:brew_app/services/auth.dart';
+import 'package:brew_app/services/database.dart';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:brew_app/screens/home/brew_list.dart';
 
 class Home extends StatelessWidget {
 
@@ -7,7 +11,10 @@ class Home extends StatelessWidget {
 
 	@override
 	Widget build(BuildContext context) {
-		return Scaffold(
+		return StreamProvider<QuerySnapshot?>.value(
+			initialData: null,
+			value: DatabaseService().brews,
+			child: Scaffold(
 			backgroundColor: Colors.brown[50],
 			appBar: AppBar(
 				title: Text("Brew App"),
@@ -23,6 +30,8 @@ class Home extends StatelessWidget {
 					)
 				],
 			),
+			body: BrewList(),
+		),
 		);
 	}
 }
