@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:brew_app/shared/constants.dart';
+import 'package:flutter/material.dart';
 
 class SettingsForm extends StatefulWidget {
   @override
@@ -34,16 +34,25 @@ class _SettingsFormState extends State<SettingsForm> {
           SizedBox(height: 20.0),
 
           //dropdown
-          DropdownButtonFormField(
-          	decoration: textInputDecoration,
-          	value: _currentSugars ?? "0",
-          	items: sugars.map((sugar){
-          		return DropdownMenuItem(
-          			value = sugar,
-          			child: Text("$sugar sugars"),
-          			);
-          		}).toList(),
-          	    onChanged: (val) => setState(() => _currentSugars = val)
+          DropdownButtonFormField<String>(
+              decoration: textInputDecoration,
+              value: _currentSugars ?? "0",
+              items: sugars.map((sugar) {
+                return DropdownMenuItem<String>(
+                  //value = sugar,
+                  child: Text("$sugar sugars"),
+                );
+              }).toList(),
+              onChanged: (val) => setState(() => _currentSugars = val)
+              ),
+          Slider(
+          	value: (_currentStrength ?? 100).toDouble(),
+          	activeColor: Colors.brown[_currentStrength ?? 100],
+          	inactiveColor: Colors.brown[_currentStrength ?? 100],
+          	min: 100,
+          	max: 900,
+          	divisions: 8,
+          	onChanged: (val) => setState(() => _currentStrength = val.round()),
           	),
           RaisedButton(
               color: Colors.pink[400],
