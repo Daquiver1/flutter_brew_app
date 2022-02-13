@@ -1,37 +1,36 @@
-import 'package:flutter/material.dart';
+import 'package:brew_app/models/brew.dart';
+import 'package:brew_app/screens/home/brew_list.dart';
 import 'package:brew_app/services/auth.dart';
 import 'package:brew_app/services/database.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:brew_app/screens/home/brew_list.dart';
-import 'package:brew_app/models/brew.dart';
 
 class Home extends StatelessWidget {
+  final AuthService _auth = AuthService();
 
-	final AuthService _auth = AuthService();
-
-	@override
-	Widget build(BuildContext context) {
-		return StreamProvider<List<Brew>>.value(
-			initialData: [],
-			value: DatabaseService().brews,
-			child: Scaffold(
-			backgroundColor: Colors.brown[50],
-			appBar: AppBar(
-				title: Text("Brew App"),
-				backgroundColor: Colors.brown[400],
-				elevation: 0.0,
-				actions: <Widget>[
-				FlatButton.icon(
-					icon: Icon(Icons.person),
-					label: Text("Logout"),
-					onPressed: () async {
-						await _auth.signOut();
-						},
-					)
-				],
-			),
-			body: BrewList(),
-		),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return StreamProvider<List<Brew>>.value(
+      initialData: [],
+      value: DatabaseService().brews,
+      child: Scaffold(
+        backgroundColor: Colors.brown[50],
+        appBar: AppBar(
+          title: Text("Brew App"),
+          backgroundColor: Colors.brown[400],
+          elevation: 0.0,
+          actions: <Widget>[
+            FlatButton.icon(
+              icon: Icon(Icons.person),
+              label: Text("Logout"),
+              onPressed: () async {
+                await _auth.signOut();
+              },
+            )
+          ],
+        ),
+        body: BrewList(),
+      ),
+    );
+  }
 }
