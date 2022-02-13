@@ -6,9 +6,13 @@ class MyUser {
 
 class UserData {
   final String? uid;
-  final String? name;
-  final String? sugars;
+  final String name;
+  final String sugars;
   final int strength;
 
-  UserData({this.uid, this.sugars, required this.strength, this.name});
+  UserData(
+      {this.uid,
+      required this.sugars,
+      required this.strength,
+      required this.name});
 }
