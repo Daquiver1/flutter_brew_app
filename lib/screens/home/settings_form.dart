@@ -50,14 +50,16 @@ class _SettingsFormState extends State<SettingsForm> {
                   //dropdown
                   DropdownButtonFormField<String>(
                       decoration: textInputDecoration,
-                      value: _currentSugars ?? userData?.sugars,
+                      value: null,
+                      //value: _currentSugars ?? userData?.sugars,
                       items: sugars.map((sugar) {
-                        return DropdownMenuItem<String>(
-                          //value = sugar,
+                        return DropdownMenuItem(
                           child: Text("$sugar sugars"),
+                          value: sugar,
                         );
                       }).toList(),
-                      onChanged: (val) => setState(() => _currentSugars = val)),
+                      onChanged: (val) =>
+                          setState(() => _currentSugars = val.toString())),
                   Slider(
                     value: (_currentStrength ?? userData?.strength)!.toDouble(),
                     activeColor:
@@ -78,22 +80,20 @@ class _SettingsFormState extends State<SettingsForm> {
                       ),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                        	await DatabaseService(uid: user.uid).updateUserData(
-                        		_currentSugars ?? userData!.sugars,
-                        		_currentName ?? userData!.name,
-                        		_currentStrength ?? userData!.strength,
-                        	);
-                        	Navigator.pop(context);
+                          await DatabaseService(uid: user.uid).updateUserData(
+                            _currentSugars ?? userData!.sugars,
+                            _currentName ?? userData!.name,
+                            _currentStrength ?? userData!.strength,
+                          );
+                          Navigator.pop(context);
                         }
-                      }
-                    ),
+                      }),
                 ],
               ),
             );
           } else {
             return Loading();
           }
-        }
-       );
+        });
   }
 }
