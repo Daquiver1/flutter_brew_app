@@ -1,18 +1,14 @@
 class MyUser {
+  final String? uid;
 
-	final String? uid;
-
-	MyUser({this.uid}); 
-
+  MyUser({this.uid});
 }
 
-class UserData{
+class UserData {
+  final String? uid;
+  final String? name;
+  final String? sugars;
+  final int strength;
 
-	final String? uid;
-	final String? name;
-	final String? sugars;
-	final int? strength;
-
-	UserData({ this.uid, this.sugars, this.strength, this.name});
-
+  UserData({this.uid, this.sugars, required this.strength, this.name});
 }
